@@ -92,6 +92,22 @@ const handleLogin = () =>{
   navigate("/login");
 }
 
+const goToPublicMain = () =>{
+  navigate("/");
+}
+
+const goToPublicFood = () =>{
+  navigate("/foods");
+}
+
+const goToPublicDrink = () =>{
+  navigate("/drinks");
+}
+
+const goToPublicExtra = () =>{
+  navigate("/extras");
+}
+
 const handleLogout = async () =>{
   try{
     const response = await axiosInstance.post('/authentication/token/delete/', {withCredentials: true});
@@ -169,21 +185,21 @@ const list_auth = (anchor) => (
     >
       <List>
 
-          <ListItem button >
+          <ListItem button onClick={() => goToPublicMain()}>
             
             <ListItemText>
                 Main
             </ListItemText>
           </ListItem>
 
-          <ListItem button >
+          <ListItem button onClick={() => goToPublicFood()}>
             
             <ListItemText>
                 Foods
             </ListItemText>
           </ListItem>
 
-          <ListItem button >
+          <ListItem button onClick={() => goToPublicDrink()}>
             
             <ListItemText>
                 Drinks
@@ -191,7 +207,7 @@ const list_auth = (anchor) => (
             </ListItem>
 
 
-          <ListItem button >
+          <ListItem button onClick={() => goToPublicExtra()}>
             
               <ListItemText>
                  Cakes
