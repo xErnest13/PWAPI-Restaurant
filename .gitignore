@@ -1,0 +1,5 @@
+backend/db.sqlite3
+restaurantorder/node_modules/
+order_env/
+backend/authuser/migrations/
+backend/restaurant/migrations/
