@@ -15,32 +15,44 @@ def api_schema_generator():
     api_schema = coreapi.Document(
         title="My Swagger",
         content={
-            "GET ALL ORDER": {
+            "ORDERS": {
                 "int_api_get": coreapi.Link(
                     url="/api/restaurant/get_allorders/",
                     action="get",
-                    description="Get all order",
+                    description="Get all order",             
+                ),
+                "int_api_post": coreapi.Link(
+                    url="/api/restaurant/createOrder/",
+                    action="post",
+                    description="Create an order",
                     fields=[
                         coreapi.Field(
-                            name="oreder.id",
+                            name="Id",
                             required=True,
                             location="path",
                         ),
                     ]                     
                 ),
+                "int_api_put": coreapi.Link(
+                    url="/api/restaurant/order/1",
+                    action="put",
+                    description="Manipulate Order",
+                    fields=[
+                        coreapi.Field(
+                            name="Id",
+                            required=True,
+                            location="path",
+                            description="ID of the Order"
+                        ),
+                    ]                     
+                ),
+                
             },
             "FOOD" : {
                 "int_api_get": coreapi.Link(
                     url="/api/restaurant/get_allfood/",
                     action="get",
-                    description="Get all food", 
-                    fields=[
-                        coreapi.Field(
-                            name="food.id",
-                            required=True,
-                            location="path",
-                        ),
-                    ]                   
+                    description="Get all food",           
                 ),
                 "int_api_post": coreapi.Link(
                     url="/api/restaurant/createFood/",
@@ -73,19 +85,25 @@ def api_schema_generator():
                         ),
                     ]
                 ),
+                "int_api_put": coreapi.Link(
+                    url="/api/restaurant/food/3",
+                    action="put",
+                    description="Manipulate Food",
+                    fields=[
+                        coreapi.Field(
+                            name="Id",
+                            required=True,
+                            location="path",
+                            description="ID of the Food"
+                        ),
+                    ]                     
+                ),
             },
             "DRINK" : {
                  "int_api_get": coreapi.Link(
                     url="/api/restaurant/get_alldrink/",
                     action="get",
-                    description="Get all drink",
-                    fields=[
-                        coreapi.Field(
-                            name="drink.id",
-                            required=True,
-                            location="path",
-                        ),
-                    ]                     
+                    description="Get all drink",              
                 ),
                 "int_api_post": coreapi.Link(
                     url="/api/restaurant/createDrink/",
@@ -112,19 +130,25 @@ def api_schema_generator():
                         ),
                     ]
                 ),
+                "int_api_put": coreapi.Link(
+                    url="/api/restaurant/drink/2",
+                    action="put",
+                    description="Manipulate Drink",
+                    fields=[
+                        coreapi.Field(
+                            name="Id",
+                            required=True,
+                            location="path",
+                            description="ID of the Drink"
+                        ),
+                    ]                     
+                ),
             },
             "CAKE": {
                 "int_api_get": coreapi.Link(
                     url="/api/restaurant/get_allextra/",
                     action="get",
-                    description="Get all cake",
-                    fields=[
-                        coreapi.Field(
-                            name="cake.id",
-                            required=True,
-                            location="path",
-                        ),
-                    ]                     
+                    description="Get all cake",         
                 ),
                 "int_api_post": coreapi.Link(
                     url="/api/restaurant/createExtra/",
@@ -151,7 +175,28 @@ def api_schema_generator():
                         ),
                     ]
                 ),
+                "int_api_put": coreapi.Link(
+                    url="/api/restaurant/extra/1",
+                    action="put",
+                    description="Manipulate Cake",
+                    fields=[
+                        coreapi.Field(
+                            name="Id",
+                            required=True,
+                            location="path",
+                            description="ID of the Cake"
+                        ),
+                    ]                     
+                ),
             },
+            "USERS" : {
+                "int_api_get": coreapi.Link(
+                    url="/api/authentication/getUsers/",
+                    action="get",
+                    description="Get all Users",                 
+                ),
+                        
+                }
             
         }
     )
