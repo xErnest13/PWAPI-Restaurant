@@ -43,7 +43,10 @@ const PublicExtras = () =>{
     }
 
     const handleAddExtra = (extra) =>{
-
+        let cart_array = [...cartItem];
+        cart_array.push(extra);
+        localStorage.setItem('extra_content', JSON.stringify(cart_array));
+        setCartItem(cart_array);
     }
 
 

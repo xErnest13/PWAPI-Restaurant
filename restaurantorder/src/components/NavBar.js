@@ -22,15 +22,17 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 
 
+
 import axiosInstance from '../axiosApi';
 
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({cartitem}) => {
+const NavBar = () => {
   
   const navigate = useNavigate();
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  
 
   React.useEffect(()=>{
     console.log(localStorage.getItem('currentUser'));
@@ -124,7 +126,7 @@ const handleLogout = async () =>{
 }
 
 const goToCart = () =>{
-  console.log("go to cart");
+  navigate("/cart");
 }
 
 //menu with auth user
@@ -317,7 +319,7 @@ const list_auth = (anchor) => (
               onClick={() => goToCart()}
               color="inherit"
             >
-              <Badge color="error" badgeContent={cartitem}>
+              <Badge color="error" >
               <ShoppingCartIcon sx={{color:'black'}}/>  
               </Badge>
             </IconButton>

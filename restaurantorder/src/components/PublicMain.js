@@ -18,6 +18,8 @@ const styled = {
 const PublicMain = () =>{
 
     const navigate = useNavigate();
+
+    console.log("Main");
     
     const goToFood = () => {
         navigate("/foods");

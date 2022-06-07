@@ -32,9 +32,41 @@ def post_orders(request, *args, **kwargs):
 
     if request.method == 'POST':
         print(request.data)
+
+        drinks = request.data.pop('drinks')
+        foods = request.data.pop('foods')
+        extras = request.data.pop('extras')
+
+        print("REQUEST", request.data)
+
         neworder = OrderSerializer(data=request.data)
         if neworder.is_valid():
+            print("YES")
+        else:
+            print(neworder.errors)
+        
+        if neworder.is_valid():
+            print("valid")
             neworder.save()
+
+        print(neworder.data['id'])
+        order_obj = Order.objects.get(pk=neworder.data['id'])
+        print("Order object", order_obj)
+        for drink in drinks:
+            drink_obj = Drink.objects.get(pk=drink['id'])
+            drink_obj.drink_owner = order_obj
+            drink_obj.save()
+
+        for food in foods:
+            food_obj = Food.objects.get(pk=food['id'])
+            food_obj.food_owner = order_obj
+            food_obj.save()
+
+        for extra in extras:
+            extra_obj = Extra.objects.get(pk=extra['id'])
+            extra_obj.extra_owner = order_obj
+            extra_obj.save()
+            
         
         try:
             response_data = {
@@ -91,16 +123,14 @@ def manipulate_order(request, *args, **kwargs):
 
     if request.method == 'DELETE':
 
-        response = {}
-
         try:
             order.delete()
-            response = {
+            response_data = {
                 'message':'success',
             }
             return JsonResponse(response_data, status=status.HTTP_201_CREATED)
         except:
-            response = {
+            response_data = {
                 'message':'failed',
             }
             return JsonResponse(response_data, status=status.HTTP_400_BAD_REQUEST)
@@ -194,19 +224,18 @@ def manipulate_food(request, *args, **kwargs):
 
     if request.method == 'DELETE':
 
-        response = {}
 
         try:
             food.delete()
             response = {
                 'message':'success',
             }
-            return JsonResponse(response_data, status=status.HTTP_201_CREATED)
+            return JsonResponse(response, status=status.HTTP_201_CREATED)
         except:
             response = {
                 'message':'failed',
             }
-            return JsonResponse(response_data, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(response, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -281,19 +310,17 @@ def manipulate_drink(request, *args, **kwargs):
 
     if request.method == 'DELETE':
 
-        response = {}
-
         try:
             drink.delete()
             response = {
                 'message':'success',
             }
-            return JsonResponse(response_data, status=status.HTTP_201_CREATED)
+            return JsonResponse(response, status=status.HTTP_201_CREATED)
         except:
             response = {
                 'message':'failed',
             }
-            return JsonResponse(response_data, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(response, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -368,16 +395,14 @@ def manipulate_extra(request, *args, **kwargs):
 
     if request.method == 'DELETE':
 
-        response = {}
-
         try:
             extra.delete()
             response = {
                 'message':'success',
             }
-            return JsonResponse(response_data, status=status.HTTP_201_CREATED)
+            return JsonResponse(response, status=status.HTTP_201_CREATED)
         except:
             response = {
                 'message':'failed',
             }
-            return JsonResponse(response_data, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(response, status=status.HTTP_400_BAD_REQUEST)

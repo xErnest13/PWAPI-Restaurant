@@ -22,6 +22,8 @@ const styled = {
 
 const Main = () =>{
     const navigate = useNavigate();
+
+    console.log("manage Main");
     
     const goToFood = () => {
         navigate("/manageFoods");

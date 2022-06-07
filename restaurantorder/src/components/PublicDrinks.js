@@ -45,15 +45,16 @@ const PublicDrinks = () => {
 
     const handleAddDrink = (drink) => {
         let cart_array = [...cartItem];
-        cart_array.push(drink.id);
-        localStorage.setItem('cart_content', JSON.stringify(cart_array));
+        cart_array.push(drink);
+        console.log(cart_array);
+        localStorage.setItem('drink_content', JSON.stringify(cart_array));
         setCartItem(cart_array);
     }
 
 
     return (
         <React.Fragment>
-            <NavBar cartitem={cartItem.length} />
+            <NavBar  />
 
             <Grid container
                 justifyContent="center"

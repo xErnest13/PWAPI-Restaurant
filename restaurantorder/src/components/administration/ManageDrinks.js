@@ -234,7 +234,7 @@ const ManageDrinks = () =>{
                                     </Avatar>
                                 }
 
-                                title={drink_item.name}
+                                title={drink_item.name}        
                             />
                             <CardMedia
                                 component="img"

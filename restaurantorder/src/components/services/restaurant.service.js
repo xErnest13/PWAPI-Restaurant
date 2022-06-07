@@ -37,6 +37,18 @@ const addExtras = (data) =>{
     return axiosInstance.post('/restaurant/createExtra/', data);
 }
 
+const deleteFood = (id) =>{
+    return axiosInstance.delete('/restaurant/food/'+id);
+}
+
+const deleteDrink = (id) =>{
+    return axiosInstance.delete('/restaurant/drink/'+id);
+}
+
+const deleteExtra = (id) =>{
+    return axiosInstance.delete('/restaurant/extra/'+id);
+}
+
 const retriveAllFoods = () =>{
     return axiosInstance.get('/restaurant/get_allfood/');
 }
@@ -47,6 +59,10 @@ const retriveAllDrinks = () =>{
 
 const retriveAllExtra = () =>{
     return axiosInstance.get('/restaurant/get_allextra/');
+}
+
+const createOrder = (data) =>{
+    return axiosInstance.post('/restaurant/createOrder/',data);
 }
 
 export default {
@@ -61,5 +77,9 @@ export default {
     getExtra,
     editFood,
     editDrink,
-    editExtra
+    editExtra,
+    deleteDrink,
+    deleteExtra,
+    deleteFood,
+    createOrder
 }

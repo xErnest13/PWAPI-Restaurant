@@ -44,8 +44,8 @@ const PublicFoods = () => {
 
     const handleAddFood = (food)  =>{
         let cart_array = [...cartItem];
-        cart_array.push(food.id);
-        localStorage.setItem('cart_content', JSON.stringify(cart_array));
+        cart_array.push(food);
+        localStorage.setItem('food_content', JSON.stringify(cart_array));
         setCartItem(cart_array);
     } 
 

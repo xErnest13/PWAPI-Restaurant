@@ -23,6 +23,7 @@ import PublicMain from './components/PublicMain';
 import PublicFoods from './components/PublicFoods';
 import PublicDrinks from './components/PublicDrinks';
 import PublicExtras from './components/PublicExtras';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path={"/foods"} element={<PublicFoods/>}/>
           <Route path={"/drinks"} element={<PublicDrinks/>}/>
           <Route path={"/extras"} element={<PublicExtras/>}/>
+          <Route path={"/cart"} element={<Cart/>}/>
           <Route path={"/login"} element={<Login/>}/>
           {/*Auth routes  */}
           <Route path={"/manageMain"} element={<PrivateRoute><Main/></PrivateRoute>}/>

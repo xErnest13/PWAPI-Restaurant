@@ -6,7 +6,15 @@ import restaurantService from '../services/restaurant.service';
 import { useParams } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 
@@ -15,6 +23,7 @@ const EditFood = () =>{
 
     const food_id = useParams();
     const [food_data, setFoodData] = React.useState({});
+    const [openDialog, setOpenDialog] = React.useState(false);
     const navigate = useNavigate();
 
 
@@ -62,6 +71,29 @@ const EditFood = () =>{
                 console.log(e);
             })
 
+    }
+
+    const handleOpenDialog = () =>{
+        setOpenDialog(true);
+    }
+
+    const handleDelete = () => {
+        restaurantService.deleteFood(food_id.id)
+            .then(response =>{
+                
+                if(response.data['message'] === "success"){
+                    console.log("delete success");
+                    navigate("/manageFoods");
+                }
+
+            })
+            .catch(e =>{
+                console.log(e);
+            })
+    }
+
+    const handleClose = () =>{
+        setOpenDialog(false);
     }
 
     return(
@@ -165,12 +197,50 @@ const EditFood = () =>{
                     </Grid>
 
                     <Grid item xs>
+                        <Tooltip title="Delete">
+                            <IconButton
+                                size="large"
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleOpenDialog}
+                                color="inherit"
+                            >
+                                <DeleteIcon />
+                            </IconButton>
+                            </Tooltip>
+                        </Grid>
+
+                    <Grid item xs>
 
                     </Grid>
                    
             </Grid>
             </Paper>
             </Grid>
+
+            <React.Fragment>
+                <Dialog
+                    open={openDialog}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"Delete"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Are you sure you want to delete this item?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="error">Cancel</Button>
+                        <Button color="primary" onClick={handleDelete} autoFocus>
+                            Confirm
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment>
 
         </React.Fragment>
     );
