@@ -17,5 +17,4 @@ urlpatterns = [
     path('get_allextra/',views.get_extra_list),
     path('createExtra/',views.post_extra),
     path('extra/<int:pk>',views.manipulate_extra),
-
 ]

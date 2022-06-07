@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurant',
     'authuser',
-
+    
     #3rd party packages
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
     'simple_history',
+    'rest_framework_swagger',
+
 ]
 
 MIDDLEWARE = [
@@ -123,9 +125,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-
+    #'DEFAULT_SCHEMA_CLASS': (
+    #    'rest_framework.schemas.coreapi.AutoSchema',
+    #),
 
 }
+
 
 TEMPLATES = [
     {
@@ -139,6 +144,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries' : {
+                'staticfiles': 'django.templatetags.static', 
+            },
         },
     },
 ]
